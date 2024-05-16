@@ -1,0 +1,23 @@
+.box {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: #1300ff;
+}
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  position: "relative";
+  /* height:700px; */
+}
+.embla__slide {
+  /* flex: 0 0 100%; */
+  width: 100%;
+  min-width: 0;
+  overflow: "hidden";
+  position: "relative";
+  height:500px; 
+}
