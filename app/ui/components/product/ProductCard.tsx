@@ -1,5 +1,6 @@
 
 "use client";
+import Link from 'next/link';
 import React from 'react';
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image"
@@ -60,7 +61,7 @@ export default function ProductCard({ img }: ProductCardProps) {
             <div
 
             >
-                <div className="relative" >
+                <Link href="/products/product/1" className="relative" >
                     <Image src={img.image_cover} alt={img.title}
                         sizes="100vw"
                         style={{
@@ -75,7 +76,7 @@ export default function ProductCard({ img }: ProductCardProps) {
                         animate={{ x: animate.x, y: animate.y, rotate: animate.rotate }}
                         transition={{ type: "spring" }}
                     /> */}
-                </div>
+                </Link>
                 <motion.button
                     className="w-full p-4 bg-orange-600 text-white text-center shadow-md"
                     variants={btnAnimate}
