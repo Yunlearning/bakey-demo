@@ -44,7 +44,7 @@ export default function TopNav({ className }: { className?: string }) {
     return (
         <motion.div
             id='page-header'
-            className={`sticky bg-white pb-4 top-0 z-10 transition-shadow shadow ${className}`}
+            className={`sticky bg-white pb-4 top-0 z-20 transition-shadow shadow ${className}`}
         >
             <div className='flex flex-row w-full justify-end pr-4'>
                 <IconBtn><UserIcon className="w-6 text-blue-500" /></IconBtn>

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import {
@@ -8,6 +9,7 @@ import { FaPlus, FaMinus, FaShoppingBag } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { NumberInput } from "@/app/ui/components/inputs/inputComponents";
+import { ProductCarousel } from "@/app/ui/components/product/productCarousel";
 
 const ulVariants = {
     open: {
@@ -23,6 +25,56 @@ const arrowVariants = {
     open: { rotate: 180 },
     closed: { rotate: 0 }
 }
+
+const product = {
+    id: 1,
+    name: "紅莓女神貝果（奶素）",
+    description: "粉紅爆擊 💕💕💕 一起享受五月份香甜粉色的環抱吧!!!",
+    price: 50,
+    tags: ["葷", "奶", "素", "蛋"],
+    discount: {
+        end: "2024/05/31 00:00",
+        rules: [
+            "全店，消費滿$1580享冷凍免運費",
+            "全店，離島消費滿$2500免運費",
+            "全店，限時活動⏱常溫配送滿$998 免運費",
+            "其他優惠..."
+        ]
+    },
+    img: [{
+        src: "/bagel/bagel-1.jpg",
+        alt: "紅莓女神貝果"
+    },
+    {
+        src: "/bagel/bagel-2.webp",
+        alt: "紅莓女神貝果"
+    }, {
+        src: "/bagel/bagel-3.png",
+        alt: "紅莓女神貝果"
+    }, {
+        src: "/bagel/bagel-4.jpg",
+        alt: "紅莓女神貝果"
+    }, {
+        src: "/bagel/bagel-5.jpg",
+        alt: "紅莓女神貝果"
+    }, {
+        src: "/bagel/bagel-6.webp",
+        alt: "紅莓女神貝果"
+    }
+    ]
+}
+
+const images = [
+    // "/bagel/bagel-1.jpg",
+    // "/bagel/bagel-2.webp",
+    // "/bagel/bagel-3.png",
+    // "/bagel/bagel-4.jpg",
+    // "/bagel/bagel-5.jpg",
+    // "/bagel/bagel-6.webp",
+    "/sample/bridge-01@2x.png",
+    "/sample/bridge-02@2x.png",
+    "/sample/bridge-03@2x.png",
+]
 
 export default function Page({ params }: { params: { id: string } }) {
     const id = params.id;
@@ -50,9 +102,37 @@ export default function Page({ params }: { params: { id: string } }) {
                     { label: "個品", href: `/products/product/${[id]}`, active: true }
                 ]}
             />
-            {/* <h1>Product Info {id}</h1> */}
-            <div className="flex flex-row px-16">
-                <div className="flex-initial w-full p-4 md:w-1/2 bg-orange-300"></div>
+
+            <div className="flex flex-wrap flex-row px-2 md:px-8 lg:px-16">
+                <div className="flex-initial w-full p-4 md:w-1/2 bg-white">
+                    <div
+                        className="w-full max-h-80 relative overflow-hidden flex justify-end items-center"
+                    >
+                        <ProductCarousel images={images} />
+                    </div>
+                    <div className="relative pt-4 flex flex-row justify-start  gap-x-2">
+                        {
+                            product.img.map((img, index) => (
+                                <div key={index} className="relative w-1/6 bg-orange-300  ">
+                                    <Image
+                                        sizes="100vw"
+                                        style={{
+                                            width: '100vw',
+                                            height: 'auto',
+                                            objectFit: 'cover',
+                                            // objectFit: 'contain',
+                                        }}
+                                        width={100}
+                                        height={100}
+                                        src={img.src}
+                                        alt={img.alt}
+                                    />
+                                </div>
+                            )
+                            )
+                        }
+                    </div>
+                </div>
                 <div className="flex flex-col gap-5 flex-initial w-full p-4 md:w-1/2 ">
                     <p className="text-3xl font-bold">紅莓女神貝果（奶素）</p>
                     <div className="w-full flex flex-row gap-1">
@@ -127,11 +207,11 @@ export default function Page({ params }: { params: { id: string } }) {
                     </motion.div>
                     <div className="flex space-x-4 justify-center font-bold text-white">
                         <motion.button
-                            className="p-4 w-1/2 bg-sky-600"
+                            className="p-4 w-1/2 bg-sky-600 shadow-lg"
                             whileTap={{ scale: 0.97 }}
                         >加入追蹤清單</motion.button>
                         <motion.button
-                            className="p-4 w-1/2 bg-black flex justify-center items-center"
+                            className="p-4 w-1/2 bg-black flex justify-center items-center shadow-lg"
                             whileTap={{ scale: 0.97 }}
                         >
                             <span className="pr-2"><FaShoppingBag /></span>

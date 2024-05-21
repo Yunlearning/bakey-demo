@@ -7,7 +7,18 @@ import Carousel from "./ui/components/Carousel";
 import Introduce from "./ui/homePage/Introduce";
 import Footer from "./ui/homePage/Footer";
 
-
+import { ProductCarousel } from "@/app/ui/components/product/productCarousel";
+const images = [
+  // "/bagel/bagel-1.jpg",
+  // "/bagel/bagel-2.webp",
+  // "/bagel/bagel-3.png",
+  // "/bagel/bagel-4.jpg",
+  // "/bagel/bagel-5.jpg",
+  // "/bagel/bagel-6.webp",
+  "/sample/bridge-01@2x.png",
+  "/sample/bridge-02@2x.png",
+  "/sample/bridge-03@2x.png",
+]
 // const OPTIONS: EmblaOptionsType = { loop: false }
 // const SLIDE_COUNT = 5
 // const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
@@ -28,5 +39,29 @@ export default function Home() {
       <Introduce />
       <Footer />
     </main>
+    // 
+    // <div
+    //   style={{
+    //     width: '100vw',
+    //     height: '100vh',
+    //     overflow: 'hidden',
+    //     margin: 0,
+    //     padding: 0,
+    //     display: 'flex',
+    //     justifyContent: 'start',
+    //     alignItems: 'center',
+    //   }}>
+    //   <div
+    //     style={{
+    //       width: '100vw',
+    //       height: '100vh',
+    //       position: 'relative',
+    //       display: 'flex',
+    //       justifyContent: 'start',
+    //       alignItems: 'center',
+    //     }}
+    //   >
+    //     <ProductCarousel images={images} />
+    //   </div> </div>
   );
 }
