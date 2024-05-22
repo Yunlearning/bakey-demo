@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 // import { wrap } from "popmotion";
@@ -39,34 +39,40 @@ const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
 };
 interface ProductCarouselProps {
-    images: string[]
+    images: string[],
+    setImageIndex?: (index: number) => void
 }
 
-interface testWrapperProps {
+interface pageWrapProps {
     start: number,
     length: number,
     currentNum: number
 }
 // return array index
 // 取餘數，使分頁循環
-const testWrapper = ({ start, length, currentNum }: testWrapperProps) => {
+const pageWrap = ({ start, length, currentNum }: pageWrapProps) => {
     currentNum = Math.abs(currentNum);
     return start + currentNum % length
 }
 
 
-export const ProductCarousel = ({ images }: ProductCarouselProps) => {
+export const ProductCarousel = ({ images, setImageIndex }: ProductCarouselProps) => {
     const [[page, direction], setPage] = useState([0, 0]);
     // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
     // then wrap that within 0-2 to find our image ID in the array below. By passing an
     // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
     // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
-    // const imageIndex = testWrapper(0, images.length, page);
-    const imageIndex = testWrapper({ start: 0, length: images.length, currentNum: page });
+    // const imageIndex = pageWrap(0, images.length, page);
+    const imageIndex = pageWrap({ start: 0, length: images.length, currentNum: page });
 
     const paginate = (newDirection: number) => {
         setPage([page + newDirection, newDirection]);
     };
+    useEffect(() => {
+        if (setImageIndex) {
+            setImageIndex(imageIndex);
+        }
+    }, [imageIndex, setImageIndex]);
 
     return (
         <>

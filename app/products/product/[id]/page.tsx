@@ -5,11 +5,12 @@ import React, { useState } from "react";
 import {
     FiChevronDown,
 } from "react-icons/fi";
-import { FaPlus, FaMinus, FaShoppingBag } from "react-icons/fa";
+import { FaPlus, FaMinus, FaShoppingBag, FaSearchPlus } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { NumberInput } from "@/app/ui/components/inputs/inputComponents";
 import { ProductCarousel } from "@/app/ui/components/product/productCarousel";
+import { ModalWrapper, SpringModal } from "@/app/ui/components/SpringModal";
 
 const ulVariants = {
     open: {
@@ -20,6 +21,10 @@ const ulVariants = {
         opacity: 0,
         height: 0
     }
+}
+const fadeVariants = {
+    open: { opacity: 0.45 },
+    closed: { opacity: 0 }
 }
 const arrowVariants = {
     open: { rotate: 180 },
@@ -65,23 +70,49 @@ const product = {
 }
 
 const images = [
-    // "/bagel/bagel-1.jpg",
-    // "/bagel/bagel-2.webp",
-    // "/bagel/bagel-3.png",
-    // "/bagel/bagel-4.jpg",
-    // "/bagel/bagel-5.jpg",
-    // "/bagel/bagel-6.webp",
-    "/sample/bridge-01@2x.png",
-    "/sample/bridge-02@2x.png",
-    "/sample/bridge-03@2x.png",
+    "/bagel/bagel-1.jpg",
+    "/bagel/bagel-2.webp",
+    "/bagel/bagel-3.png",
+    "/bagel/bagel-4.jpg",
+    "/bagel/bagel-5.jpg",
+    "/bagel/bagel-6.webp",
+    // "/sample/bridge-01@2x.png",
+    // "/sample/bridge-02@2x.png",
+    // "/sample/bridge-03@2x.png",
 ]
+
+
+const Mask = () => {
+    const [isFade, setIsFade] = useState(false);
+    return (
+        <motion.div
+            className="bg-slate-800 absolute top-0 left-0 w-full h-full rounded flex justify-center items-center"
+            variants={fadeVariants}
+            initial={false}
+            animate={isFade ? "open" : "closed"}
+            onMouseEnter={() => setIsFade(true)}
+            onMouseLeave={() => setIsFade(false)}
+        >
+            <span className="text-white text-2xl"><FaSearchPlus /></span>
+        </motion.div>
+    )
+}
+
+
 
 export default function Page({ params }: { params: { id: string } }) {
     const id = params.id;
+    const [isOpen, setIsOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [count, setCount] = useState(1);
+    const [imgIndex, setImgIndex] = useState(0);
+    const [clickImgIndex, setClickImgIndex] = useState(0);
     const handleExpand = () => {
         setExpanded(!expanded);
+    }
+    const handleModalOpen = (index: number) => {
+        setIsOpen(true);
+        setClickImgIndex(index);
     }
     const handleCount = (e: React.MouseEvent<HTMLLIElement>, action: string) => {
         e.preventDefault();
@@ -103,18 +134,34 @@ export default function Page({ params }: { params: { id: string } }) {
                 ]}
             />
 
+
             <div className="flex flex-wrap flex-row px-2 md:px-8 lg:px-16">
                 <div className="flex-initial w-full p-4 md:w-1/2 bg-white">
                     <div
-                        className="w-full max-h-80 relative overflow-hidden flex justify-end items-center"
+                        className="w-full max-h-96 relative overflow-hidden flex justify-end items-center"
                     >
-                        <ProductCarousel images={images} />
+                        <ProductCarousel images={images} setImageIndex={setImgIndex} />
                     </div>
-                    <div className="relative pt-4 flex flex-row justify-start  gap-x-2">
+                    <div className="relative pt-4 flex flex-row justify-start gap-x-2 cursor-pointer">
                         {
                             product.img.map((img, index) => (
-                                <div key={index} className="relative w-1/6 bg-orange-300  ">
+                                <motion.div
+                                    key={index}
+                                    // initial={false}
+
+                                    // animate={isFade ? "open" : "closed"}
+                                    // onMouseEnter={() => setIsFade(true)}
+                                    // onMouseLeave={() => setIsFade(false)}
+                                    // initial={{ opacity: 1 }}
+                                    className={`relative w-1/6 bg-orange-300 rounded
+                                ${imgIndex === index ? "border-solid border-2 border-blue-400 " : ""
+                                        }
+                                `}
+
+                                    onClick={handleModalOpen.bind(null, index)}
+                                >
                                     <Image
+                                        className="rounded"
                                         sizes="100vw"
                                         style={{
                                             width: '100vw',
@@ -127,10 +174,26 @@ export default function Page({ params }: { params: { id: string } }) {
                                         src={img.src}
                                         alt={img.alt}
                                     />
-                                </div>
+                                    <Mask />
+                                </motion.div>
                             )
                             )
                         }
+                    </div>
+                    <div>
+                        <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} isMaskClosable={false}>
+                            {/* <div>Modal!</div> */}
+                            <Image
+                                src={product.img[clickImgIndex].src}
+                                alt="紅莓女神貝果"
+                                sizes="100vw"
+                                width={500}
+                                height={500}
+                                style={{
+                                    objectFit: 'contain',
+                                }}
+                            />
+                        </SpringModal>
                     </div>
                 </div>
                 <div className="flex flex-col gap-5 flex-initial w-full p-4 md:w-1/2 ">
