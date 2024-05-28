@@ -39,7 +39,8 @@ const SpringModal = ({ isOpen, setIsOpen, children, isMaskClosable = true }: Spr
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={handleMaskClick}
-                    className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+                    //  overflow-y-scroll 
+                    className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center cursor-pointer"
                 >
                     <motion.div
                         initial={{ scale: 0, rotate: "12.5deg" }}
@@ -48,7 +49,7 @@ const SpringModal = ({ isOpen, setIsOpen, children, isMaskClosable = true }: Spr
                         onClick={(e) => e.stopPropagation()}
                         className="bg-gradient-to-br from-slate-700 to-slate-500 p-4 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
                     >
-                        {!isMaskClosable && <div className="flex justify-end text-2xl pb-2">
+                        {!isMaskClosable && <div className="flex justify-end text-xl pb-2">
                             <motion.span
                                 className="text-slate-300 hover:text-white transition-colors cursor-pointer"
                                 whileTap={{ scale: 1.2 }}

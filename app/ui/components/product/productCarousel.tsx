@@ -39,7 +39,11 @@ const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity;
 };
 interface ProductCarouselProps {
-    images: string[],
+    // images: string[],
+    images: {
+        src: string,
+        alt: string
+    }[]
     setImageIndex?: (index: number) => void
 }
 
@@ -52,7 +56,7 @@ interface pageWrapProps {
 // 取餘數，使分頁循環
 const pageWrap = ({ start, length, currentNum }: pageWrapProps) => {
     currentNum = Math.abs(currentNum);
-    return start + currentNum % length
+    return start + currentNum % length;
 }
 
 
@@ -119,7 +123,8 @@ export const ProductCarousel = ({ images, setImageIndex }: ProductCarouselProps)
                 <motion.img
                     className="absulute cursor-pointer object-cover h-screen"
                     key={page}
-                    src={images[imageIndex]}
+                    src={images[imageIndex].src}
+                    alt={images[imageIndex].alt}
                     custom={direction}
                     variants={variants}
                     initial="enter"
