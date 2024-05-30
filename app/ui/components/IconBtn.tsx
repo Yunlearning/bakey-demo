@@ -1,16 +1,16 @@
 
 export default function IconBtn({
     children,
-    // className,
+    className,
     onClick,
 }: Readonly<{
     children: React.ReactNode;
-    // className?: string;
+    className?: string;
     onClick?: () => void;
 }>) {
     return (
         <button
-            className=""
+            className={`cursor-pointer ${className}`}
             onClick={onClick}
         >
             {children}

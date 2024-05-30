@@ -49,7 +49,8 @@ export default function TopNav({ className }: { className?: string }) {
             <div className='flex flex-row w-full justify-end pr-4'>
                 <IconBtn><UserIcon className="w-6 text-blue-500" /></IconBtn>
                 <span className='p-2'><MagnifyingGlassIcon className="w-6 " /></span>
-                <span className='p-2'><ShoppingCartIcon className="w-6 " /></span>
+                {/* <span className='p-2'><ShoppingCartIcon className="w-6 " /></span> */}
+                <Link className='p-2 text-blue-500' href="/deliver/list_cart"><ShoppingCartIcon className="w-6 " /></Link>
                 <span className='p-2'><ChatBubbleBottomCenterTextIcon className="w-6 " /></span>
             </div>
             <motion.div
