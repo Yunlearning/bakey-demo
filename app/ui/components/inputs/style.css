@@ -6,3 +6,15 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"]:focus-visible {
     outline: none;
 }
+
+input[type="radio"]:checked + label span {
+  border-color: rgb(59 130 246);
+  border: 6px solid  rgb(59 130 246);
+}
+input[type="radio"]:disabled + label span {
+  background:  rgb(212 212 216);
+  border-color:  rgb(212 212 216);
+}
+input[type="radio"]:disabled + label {
+  color: rgb(161 161 170);
+}

@@ -157,8 +157,8 @@ export default function Page() {
                                         <button className="border border-slate-500 rounded-lg w-10 h-10">-</button>
                                         <NumberInput
                                             value={amount}
-                                            min={1}
-                                            max={9}
+                                            // min={1}
+                                            // max={99}
                                             set={setAmount}
                                             className="text-center"
                                         />
@@ -179,14 +179,14 @@ export default function Page() {
                             </div>
                         </div>
                     </li>
-                    <li className="sticky top-20  z-19 flex-initial flex flex-col gap-4 w-1/4 border-2 p-2 pb-12 self-start bg-slate-200 rounded shadow">
-                        <div>
+                    <li className="sticky top-20  z-19 flex-initial flex flex-col justify-between gap-4 w-1/4 h-48  border border-zinc-300 p-2 self-start bg-zinc-100 rounded shadow">
+                        <div className="flex flex-col gap-2">
                             <p className="text-2xl font-bold">
                                 商品小計 <span className="text-xl">( 共2項 )</span>:
                             </p>
+                            <p className="text-lg font-bold text-red-500">NT$ 100</p>
                         </div>
-                        <p className="text-lg font-bold text-red-500">NT$ 100</p>
-                        <button className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 font-bold rounded-lg text-white">付款資訊</button>
+                        <Link href="/deliver/choice/1" className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 font-bold rounded-lg text-white text-center">付款資訊</Link>
                     </li>
                 </ul>
             </div>
