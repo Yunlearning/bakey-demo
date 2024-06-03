@@ -5,12 +5,34 @@ import Image from "next/image";
 import IconBtn from '@/app/ui/components/IconBtn';
 import { RadioInput } from "@/app/ui/components/inputs/inputComponents";
 import { SpringModal } from "@/app/ui/components/SpringModal";
+import { FaPlus } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
+
+const dummyAddr = [
+    {
+        name: "王*明",
+        address: "**********義路四段100巷100號100樓"
+    },
+    {
+        name: "王*明",
+        address: "**********西路一段50巷50號50樓"
+    }
+]
 
 export default function Page({ params }: { params: { id: string } }) {
     const id = params.id;
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const [switchToAdd, setSwitchToAdd] = useState(false);
     const handleModalOpen = () => {
         setIsOpen(true)
+    };
+    const handleCancel = () => {
+        if (switchToAdd) {
+            setSwitchToAdd(false)
+        } else {
+            setIsOpen(false)
+        }
     }
     // const { cart, setCart } = useCart()
     // const [cartTotal, setCartTotal] = useState(0)
@@ -44,17 +66,17 @@ export default function Page({ params }: { params: { id: string } }) {
                         <div className="flex flex-row gap-8">
                             <RadioInput
                                 htmlFor="deliver_0"
-                                label="宅配 - 冷凍"
                                 name="deliver"
                                 value="0"
                                 defaultChecked
-                            />
+                            >
+                                {"宅配 - 冷凍"}
+                            </RadioInput>
                             <RadioInput
                                 htmlFor="deliver_1"
-                                label="黑貓離島宅配-冷凍"
                                 name="deliver"
                                 value="1"
-                            />
+                            >{"黑貓離島宅配-冷凍"}</RadioInput>
                         </div>
                         <div>
                             <p>王*明</p>
@@ -74,22 +96,19 @@ export default function Page({ params }: { params: { id: string } }) {
                         <RadioInput
                             defaultChecked
                             htmlFor="creditCard"
-                            label="信用卡付款"
                             name="payment"
                             value="creditCard"
-                        />
+                        >{"信用卡付款"}</RadioInput>
                         <RadioInput
                             htmlFor="linePay"
-                            label="LINE Pay"
                             name="payment"
                             value="linePay"
-                        />
+                        >{"LINE Pay"}</RadioInput>
                         <RadioInput
                             htmlFor="ATM"
-                            label="銀行轉帳／ATM"
                             name="payment"
                             value="atm"
-                        />
+                        >{"銀行轉帳／ATM"}</RadioInput>
                     </div>
                 </li>
                 <li className="sticky top-20 z-19 flex-initial flex flex-col justify-between gap-4 w-1/4 h-48 border border-zinc-300 p-2 self-start bg-zinc-100 rounded shadow">
@@ -111,9 +130,97 @@ export default function Page({ params }: { params: { id: string } }) {
                 </li>
             </ul>
             <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} isMaskClosable={false}>
-                <div className="bg-white rounded">
-                    content
-                </div>
+                <ul className="bg-white rounded p-4 flex flex-col gap-4">
+                    <li className="text-2xl font-bold border-b-2 py-2">選擇收件方式</li>
+
+                    {
+                        switchToAdd ? (
+                            <li className="flex items-center gap-4 border-b-2 pb-4">
+                                <input type="checkbox" className="w-4 h-4" />
+                                <p>同會員資料</p>
+                            </li>) :
+                            (
+                                <li className="flex justify-between items-center border-b-2 pb-4">
+                                    <p>收件資料</p>
+                                    <button
+                                        className="flex justify-around items-center py-2 w-20 border border-slate-400 hover:border-orange-500 hover:text-orange-500 rounded font-bold text-sm"
+                                        onClick={() => setSwitchToAdd(!switchToAdd)}
+                                    >
+                                        <FaPlus />
+                                        新增
+                                    </button>
+                                </li>
+                            )
+                    }
+                    {
+                        switchToAdd ? (
+                            <li className="flex flex-col gap-2">
+                                <input type="text" placeholder="姓名" className="w-full p-2" />
+                                <input type="text" placeholder="地址" className="w-full p-2" />
+                            </li>
+                        ) : (
+                            <li className="border-b-2 pb-4">
+                                <div className="flex flex-col gap-8">
+                                    {dummyAddr.map((addr, index) => (
+                                        <div
+                                            key={index}
+                                            className="flex justify-between"
+                                        >
+                                            <RadioInput
+                                                defaultChecked={index === 0 && true}
+                                                name="address"
+                                                value={index.toString()}
+                                                htmlFor={`address_${index}`}
+                                                labelAlign="start"
+                                            >{
+                                                    <>
+                                                        <p>{addr.name}</p>
+                                                        <p>{addr.address}</p>
+                                                    </>
+                                                }</RadioInput>
+                                            <button className="flex justify-around items-center w-20 border border-slate-400 hover:border-slate-700 rounded font-bold text-sm">
+                                                <RiDeleteBin6Line />
+                                                刪除
+                                            </button>
+                                        </div>
+
+                                    ))}
+                                </div>
+                            </li>
+                        )
+                    }
+
+                    <li className="flex justify-end gap-2">
+                        <button
+                            className="py-2 w-16 border border-slate-700 rounded font-bold text-sm"
+                            onClick={handleCancel}
+                        >取消</button>
+                        {
+                            switchToAdd ? (
+                                <button
+                                    className="py-2 w-32 
+                                    bg-orange-500 text-white
+                                    border border-orange-500 rounded font-bold text-sm"
+                                    onClick={handleCancel}
+                                >確認新增</button>
+                            ) : (
+                                <button
+                                    className="py-2 w-32 
+                            bg-orange-500 text-white
+                            border border-orange-500 rounded font-bold text-sm"
+                                    onClick={handleCancel}
+                                >新增收件資訊</button>
+                            )
+                        }
+                        {/* <button
+                            className="py-2 w-32 
+                            bg-orange-500 text-white
+                            border border-orange-500 rounded font-bold text-sm"
+                            onClick={handleCancel}
+                        >使用此收件資訊</button> */}
+
+                    </li>
+                </ul>
             </SpringModal>
         </div>
     )

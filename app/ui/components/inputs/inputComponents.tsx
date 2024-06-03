@@ -32,8 +32,10 @@ export const NumberInput: React.FC<NumberInputProps> = ({ className, value, set,
     )
 }
 
+type LabelAlign = "start" | "center" | "end";
 interface RadioInputProps {
-    label: string;
+    children?: React.ReactNode;
+    // label: string;
     htmlFor: string;
     name: string;
     value?: string;
@@ -41,9 +43,12 @@ interface RadioInputProps {
     checked?: boolean;
     disabled?: boolean;
     set?: (value: string) => void;
+    labelAlign?: LabelAlign;
 }
 
-export const RadioInput: React.FC<RadioInputProps> = ({ label, htmlFor, name, value, defaultChecked, checked, disabled, set }) => {
+
+
+export const RadioInput: React.FC<RadioInputProps> = ({ children, htmlFor, name, value, defaultChecked, checked, disabled, set, labelAlign = "center" }) => {
     return (
         <div className="flex items-center">
             <input
@@ -57,10 +62,12 @@ export const RadioInput: React.FC<RadioInputProps> = ({ label, htmlFor, name, va
             // checked={checked}
             // onChange={(e) => set(e.target.value)}
             />
-            <label htmlFor={htmlFor} className="flex items-center cursor-pointer">
+            <label htmlFor={htmlFor} className={`flex items-${labelAlign} cursor-pointer`}>
                 <span className="w-4 h-4 inline-block mr-2 rounded-full border border-gray-500">
                 </span>
-                {label}
+                <div>
+                    {children}
+                </div>
             </label>
         </div>
     )
