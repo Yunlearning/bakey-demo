@@ -6,8 +6,14 @@ import IconBtn from '@/app/ui/components/IconBtn';
 import { RadioInput } from "@/app/ui/components/inputs/inputComponents";
 import { SpringModal } from "@/app/ui/components/SpringModal";
 import { FaPlus } from "react-icons/fa";
+import { GrLinkPrevious } from "react-icons/gr";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
+import { NewSteps } from "@/app/ui/SteppedProgress";
+const stepsLabels = [
+    "商品確認",
+    "付款資訊",
+    "確認訂單",
+]
 
 const dummyAddr = [
     {
@@ -22,6 +28,8 @@ const dummyAddr = [
 
 export default function Page({ params }: { params: { id: string } }) {
     const id = params.id;
+    const [stepsComplete, setStepsComplete] = useState(1);
+    const numSteps = 3;
     const [isOpen, setIsOpen] = useState(false);
     const [switchToAdd, setSwitchToAdd] = useState(false);
     const handleModalOpen = () => {
@@ -51,12 +59,16 @@ export default function Page({ params }: { params: { id: string } }) {
 
     return (
         <div className="border-b-2 pb-4">
-            <ul className="bg-slate-300 py-4 flex flex-row justify-center items-center gap-4 text-lg">
-                <li>商品確認</li>
-                <li className="text-blue-500">付款資訊</li>
-                <li>確認購買</li>
+            <ul className="bg-white py-8 w-full flex flex-row justify-center items-center text-lg">
+                <NewSteps width="w-1/2" labels={stepsLabels} numSteps={numSteps} stepsComplete={stepsComplete} />
             </ul>
-            <div className="px-16 py-4">
+            <div className="px-16 py-4 flex gap-4 items-center">
+                <Link
+                    href={`/deliver/list_cart`}
+                    className="py-2 px-3 border border-slate-400 hover:border-slate-700 rounded"
+                >
+                    <GrLinkPrevious />
+                </Link>
                 <p className="font-bold text-2xl">付款資訊</p>
             </div>
             <ul className="flex flex-row items-center gap-4 px-16">
@@ -115,7 +127,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     <div className="flex flex-col gap-2">
                         <div className="flex justify-between items-center text-sm">
                             <p className=" font-bold">商品總金額</p>
-                            <p>NT$ 100</p>
+                            <p>NT$ 130</p>
                         </div>
                         <div className="flex justify-between items-center text-sm">
                             <p className=" font-bold">運費</p>
@@ -123,7 +135,7 @@ export default function Page({ params }: { params: { id: string } }) {
                         </div>
                         <div className="flex justify-between items-center text-sm font-bold">
                             <p className="font-bold">訂單金額</p>
-                            <p className="text-lg text-red-500">NT$ 200</p>
+                            <p className="text-lg text-red-500">NT$ 230</p>
                         </div>
                     </div>
                     <Link href="/deliver/checkout/1" className="flex-initial p-2 bg-gradient-to-r from-amber-500 to-orange-500 font-bold rounded-lg text-white text-center">結帳</Link>

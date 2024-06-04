@@ -7,7 +7,12 @@ import { FaRegHeart } from "react-icons/fa";
 import { Counter } from "../../components/counter/Counter";
 import { NumberInput } from "@/app/ui/components/inputs/inputComponents";
 import IconBtn from '@/app/ui/components/IconBtn';
-
+import SteppedProgress, { NewSteps } from "@/app/ui/SteppedProgress";
+const stepsLabels = [
+    "商品確認",
+    "付款資訊",
+    "確認訂單",
+]
 const cartList = [
     {
         id: 1,
@@ -96,15 +101,15 @@ const cartList = [
 ]
 
 export default function Page() {
+    const [stepsComplete, setStepsComplete] = useState(0);
+    const numSteps = 3;
     const [amount, setAmount] = useState(1)
     return (
         <>
             {/* <Counter /> */}
             <div className="border-b-2 pb-4">
-                <ul className="bg-slate-300 py-4 flex flex-row justify-center items-center gap-4 text-lg">
-                    <li className="text-blue-500">商品確認</li>
-                    <li>付款資訊</li>
-                    <li>確認購買</li>
+                <ul className="bg-white py-8 w-full flex flex-row justify-center items-center text-lg">
+                    <NewSteps width="w-1/2" labels={stepsLabels} numSteps={numSteps} stepsComplete={stepsComplete} />
                 </ul>
                 <div className="px-16 py-4">
                     <p className="font-bold text-2xl">購物車</p>
@@ -184,7 +189,7 @@ export default function Page() {
                             <p className="text-2xl font-bold">
                                 商品小計 <span className="text-xl">( 共2項 )</span>:
                             </p>
-                            <p className="text-lg font-bold text-red-500">NT$ 100</p>
+                            <p className="text-lg font-bold text-red-500">NT$ 130</p>
                         </div>
                         <Link href="/deliver/choice/1" className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 font-bold rounded-lg text-white text-center">付款資訊</Link>
                     </li>
