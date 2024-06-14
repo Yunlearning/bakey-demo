@@ -12,6 +12,7 @@ import { NumberInput } from "@/app/ui/components/inputs/inputComponents";
 import { ProductCarousel } from "@/app/ui/components/product/productCarousel";
 import ImageGalleryModal from "@/app/ui/components/product/ImageGalleryModal";
 import ChipTabs from "@/app/ui/components/ChipTabs";
+import Introduce from "@/app/ui/homePage/Introduce";
 
 const ulVariants = {
     open: {
@@ -83,15 +84,15 @@ const images = [
 const ProductInfo = () => {
     return (
         <div className="py-16">
-            <p>ProductInfo</p>
+            <Introduce />
         </div>
     )
 }
 
 const Ingredients = () => {
     return (
-        <div className="flex flex-col gap-4">
-            <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 px-16">
+            {/* <div className="flex flex-row gap-4">
                 <div className="flex flex-col gap-2">
                     <p className="font-bold">主要成分</p>
                     <div className="flex flex-col gap-2">
@@ -116,6 +117,60 @@ const Ingredients = () => {
                     <div>奶素</div>
                     <div>蛋素</div>
                 </div>
+            </div> */}
+            <div
+
+                className="flex-initial w-1/3 h-52 p-4 bg-gradient-to-b from-orange-500 from-45% to-white to-45% self-stretch rounded-lg border-2"
+            >
+                <p className="py-6 text-2xl text-white font-bold h-1/4 flex items-center gap-2">
+                    主要成分
+                </p>
+                <ul className="bg-white h-32 p-2 flex flex-col gap-2 rounded text-lg items-start">
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>麵粉</div>
+                    </li>
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>糖</div>
+                    </li>
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>奶油</div>
+                    </li>
+                </ul>
+            </div>
+            <div
+
+                className="flex-initial w-1/3 h-52 p-4 bg-gradient-to-b from-orange-500 from-45% to-white to-45% self-stretch rounded-lg border-2"
+            >
+                <p className="py-6 text-2xl text-white font-bold h-1/4 flex items-center gap-2">
+                    次要成分
+                </p>
+                <ul className="bg-white h-32 p-2 flex flex-col gap-2 rounded text-lg">
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>食鹽</div>
+                    </li>
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>紅梅</div>
+                    </li>
+                </ul>
+            </div>
+            <div
+
+                className="flex-initial w-1/3 h-52 p-4 bg-gradient-to-b from-orange-500 from-45% to-white to-45% self-stretch rounded-lg border-2"
+            >
+                <p className="py-6 text-2xl text-white font-bold h-1/4 flex items-center gap-2">
+                    適用人群
+                </p>
+                <ul className="bg-white h-32 p-2 flex flex-col gap-2 rounded text-lg">
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>素食者</div>
+                    </li>
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>奶素</div>
+                    </li>
+                    <li className="border-b border-slate-400 w-full text-start">
+                        <div>蛋素</div>
+                    </li>
+                </ul>
             </div>
         </div>
     )
@@ -124,7 +179,7 @@ const Ingredients = () => {
 
 const ShippingAndPayment = () => {
     return (
-        <div className="flex flex-row justify-center items-center gap-4 text-start">
+        <div className="px-16 flex flex-row justify-center items-center gap-4 text-start">
             {/* <div className="flex-initial w-1/2 bg-violet-400">
                 <p className="text-xl font-bold">送貨方式</p>
                 <ul>
@@ -168,6 +223,22 @@ const ShippingAndPayment = () => {
                     <li className="flex items-center gap-2">
                         <FaCheckCircle className="text-green-400" />
                         <p>銀行轉帳／ATM</p>
+                    </li>
+                </ul>
+            </div>
+            <div className="flex-initial w-1/3 h-52 p-4 bg-gradient-to-b from-blue-500 from-45% to-white to-45% self-stretch rounded-lg border-2">
+                <p className="py-6 text-2xl text-white font-bold h-1/4 flex items-center gap-2">
+                    {/* <MdOutlinePayment /> */}
+                    其他內容
+                </p>
+                <ul className="bg-white h-32 p-2 flex flex-col gap-2 rounded">
+                    <li className="flex items-center gap-2">
+                        <FaCheckCircle className="text-green-400" />
+                        <p>其他項目</p>
+                    </li>
+                    <li className="flex items-center gap-2">
+                        <FaCheckCircle className="text-green-400" />
+                        <p>其他項目</p>
                     </li>
                 </ul>
             </div>

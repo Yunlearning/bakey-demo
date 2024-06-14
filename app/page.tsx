@@ -1,3 +1,5 @@
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import TopNav from './ui/homePage/topNav';
@@ -8,6 +10,8 @@ import Introduce from "./ui/homePage/Introduce";
 import Footer from "./ui/homePage/Footer";
 
 import { ProductCarousel } from "@/app/ui/components/product/productCarousel";
+import { SpringModal } from "@/app/ui/components/SpringModal";
+import Menu from "@/app/ui/components/product/Menu";
 const images = [
   // "/bagel/bagel-1.jpg",
   // "/bagel/bagel-2.webp",
@@ -24,8 +28,16 @@ const images = [
 // const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col relative">
+      {/* <div className="absolute top-0">
+
+</div> */}
+      <button
+        className="fixed z-30 bottom-4 right-4 bg-orange-400 hover:bg-amber-500 hover:text-black text-white font-bold rounded-lg w-24 h-16 shadow-lg"
+        onClick={() => setIsOpen(true)}
+      >本週菜單</button>
       <TopNav />
       {/* <div style={{
         position: 'sticky',
@@ -38,6 +50,9 @@ export default function Home() {
       <Carousel />
       <Introduce />
       <Footer />
+      <SpringModal isOpen={isOpen} setIsOpen={setIsOpen} isMaskClosable={false}>
+        <Menu />
+      </SpringModal>
     </main>
     // 
     // <div

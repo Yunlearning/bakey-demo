@@ -21,7 +21,7 @@ export default function Footer() {
                     <Link href="/">法式麵包</Link>
                 </div>
                 <div className="basis-1/4 flex flex-col font-medium leading-6">
-                    <p className="font-bold">關於Miopane</p>
+                    <p className="font-bold">關於Bakery</p>
                     <Link href="/">活動訊息</Link>
                     <Link href="/">品牌故事</Link>
                     <Link href="/">美味堅持</Link>
@@ -40,15 +40,15 @@ export default function Footer() {
                 </div>
                 <div className="basis-1/4 flex flex-col font-medium leading-6">
                     <p className="font-bold">聯絡我們</p>
-                    <Link href="/">好膳企業股份有限公司</Link>
-                    <Link href="/">客服專線 - 0800-036-006</Link>
-                    <Link href="/">客服信箱 - miopanemio@gmail.com</Link>
+                    <Link href="/">Mybakery Company</Link>
+                    <Link href="/">客服專線 - 1234-123-123</Link>
+                    <Link href="/">客服信箱 - XXXXXX@gmail.com</Link>
                     <Link href="/">
                         <div>客服時間 - 平日9:00am-17:00pm</div>
                         <div className="text-xs"> (例假日、國定假日非服務時間)</div>
                         <div className="text-xs"> 請善用Line@線上客服我們將盡快回覆您</div>
                     </Link>
-                    <Link href="/">地址 - 新北市中和區中正路988巷8號</Link>
+                    <Link href="/">地址 - XX縣bakery區bakery路999巷999號</Link>
                     <Link href="/">line@客服</Link>
                     <Link href="/">門市據點</Link>
                     <Link href="/">人才招攬</Link>
