@@ -121,7 +121,6 @@ export default function Page() {
     const [isPaymentDisabled, setIsPaymentDisabled] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-    const itemId = selectedItemId ?? 0;
     const [amount, setAmount] = useState(1);
     const [stepsComplete, setStepsComplete] = useState(0);
     const numSteps = 3;
@@ -138,8 +137,10 @@ export default function Page() {
         setSelectedItemId(itemId);
         setIsOpen(true);
     };
-    const handleRemoveItem = (id: number) => {
-        dispatch(removeItem(id));
+    const handleRemoveItem = (id: number | null) => {
+        if (id !== null) {
+            dispatch(removeItem(id));
+        }
         setSelectedItemId(null);
         setIsOpen(false);
     }
@@ -277,8 +278,7 @@ export default function Page() {
                                 className="py-2 w-20 
                             bg-red-500 text-white
                             border border-orange-500 rounded font-bold text-sm"
-                                // onClick={() => setIsOpen(false)}
-                                onClick={() => handleRemoveItem(itemId)}
+                                onClick={() => handleRemoveItem(selectedItemId)}
                             >刪除</button>
 
                         </li>
